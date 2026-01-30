@@ -1,0 +1,47 @@
+{
+	"users": [
+		{
+			"id": 1,
+			"login": "admin",
+			"password": "admin",
+			"registed_at": "2023-01-01",
+			"role_id": 1
+		}
+	],
+	"roles": [
+		{
+			"id": 0,
+			"name": "Администратор"
+		},
+		{
+			"id": 1,
+			"name": "Пользователь"
+		},
+		{
+			"id": 2,
+			"name": "Гость"
+		},
+		{
+			"id": 3,
+			"name": "Модератор"
+		}
+	],
+	"posts": [
+		{
+			"id": 1,
+			"title": "",
+			"image_url": "",
+			"content": "",
+			"published_at": ""
+		}
+	],
+	"comments": [
+		{
+			"id": 1,
+			"author_id": 1,
+			"post_id": 1,
+			"content": "Контент комментария",
+			"published_at": "2023-01-01"
+		}
+	]
+}
