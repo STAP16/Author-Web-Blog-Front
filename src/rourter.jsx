@@ -1,0 +1,52 @@
+import { createBrowserRouter, Outlet } from 'react-router'
+
+import Blog from './Blog'
+
+const ErrorPage = () => <div>страница ошибки</div>
+const Login = () => <div>Авторизация</div>
+const Register = () => <div>Регистрация</div>
+const Users = () => <div>Пользователи</div>
+const Posts = () => <Outlet />
+const Post = () => <div>Пост c id</div>
+const PostsList = () => <div>Список статей</div>
+
+export const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <Blog />,
+		errorElement: <ErrorPage />,
+		children: [
+			{
+				path: 'users',
+				element: <Users />
+			},
+			{
+				path: 'posts',
+				element: <Posts />,
+				children: [
+					{
+						element: <PostsList />,
+						index: true
+					},
+					{
+						path: ':id',
+						element: <Post />,
+						index: true
+					},
+					{
+						path: 'new',
+						element: <div>Новая статья</div>
+					}
+				]
+			},
+			{
+				path: 'login',
+				element: <Login />
+			},
+			{
+				path: 'register',
+				element: <Register />
+			}
+		]
+	}
+])
