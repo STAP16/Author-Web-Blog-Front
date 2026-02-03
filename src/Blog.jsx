@@ -1,6 +1,18 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router'
 import styled from 'styled-components'
+import { Header } from './components'
+
+const AppColumn = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 1000px;
+	min-height: 100%;
+	margin: 0 auto;
+
+	background-color: #fff;
+`
 
 const Content = styled.div`
 	padding: 120px 0;
@@ -10,20 +22,18 @@ const H2 = styled.h2`
 	text-align: center;
 `
 
-const Header = () => <h2>Шапка страницы</h2>
-
 const Footer = () => <h2>Футер страницы</h2>
 
 function Blog() {
 	return (
-		<>
+		<AppColumn>
 			<Header />
 			<Content>
 				<H2>Контент страницы</H2>
 				<Outlet />
 			</Content>
 			<Footer />
-		</>
+		</AppColumn>
 	)
 }
 
