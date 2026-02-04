@@ -1,18 +1,5 @@
 import styled from 'styled-components'
-
-const IconContainer = ({ className }) => (
-	<div className={className}>
-		<i
-			className="fa fa-code"
-			aria-hidden="true"
-		/>
-	</div>
-)
-
-const Icon = styled(IconContainer)`
-	font-size: 70px;
-	margin-right: 10px;
-`
+import { Icon } from '../../../icon/icon'
 
 const LargeText = styled.div`
 	font-size: 48px;
@@ -29,7 +16,11 @@ const SmallText = styled.div`
 const LogoContainer = ({ className }) => {
 	return (
 		<div className={className}>
-			<Icon />
+			<Icon
+				size="70px"
+				margin="0px 10px 0px 0px"
+				id="fa-code"
+			/>
 			<div>
 				<LargeText>Блог</LargeText>
 				<SmallText>веб-разработчика</SmallText>
