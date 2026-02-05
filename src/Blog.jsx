@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router'
 import styled from 'styled-components'
-import { Header } from './components'
+import { Footer, Header } from './components'
 
 const AppColumn = styled.div`
 	display: flex;
@@ -21,8 +21,6 @@ const Content = styled.div`
 const H2 = styled.h2`
 	text-align: center;
 `
-
-const Footer = () => <h2>Футер страницы</h2>
 
 function Blog() {
 	return (
