@@ -1,18 +1,6 @@
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 
-const FooterContainer = styled.div`
-	height: 100px;
-	background-color: #ffffff;
-	box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.23);
-	display: flex;
-	justify-content: space-between;
-	padding: 0 40px;
-	font-size: 16px;
-	font-weight: 700;
-	align-items: center;
-`
-
 const AboutBlog = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -34,7 +22,7 @@ const WeatherInfo = styled.div`
 	justify-content: center;
 `
 
-export const Footer = () => {
+export const FooterContainer = ({ className }) => {
 	const [weatherData, setWeatherData] = useState({})
 	const date = new Date().toLocaleString('ru-RU', {
 		day: '2-digit',
@@ -50,7 +38,7 @@ export const Footer = () => {
 	}, [])
 	// Погода не отоброжается (API не работает)
 	return (
-		<FooterContainer>
+		<div className={className}>
 			<AboutBlog>
 				<span>Блог веб-разработчика</span>
 				<span>stepakot0@gmail.com</span>
@@ -59,6 +47,18 @@ export const Footer = () => {
 				<span>{date}</span>
 				<WeatherInfo>Погода</WeatherInfo>
 			</WeatherBlock>
-		</FooterContainer>
+		</div>
 	)
 }
+
+export const Footer = styled(FooterContainer)`
+	height: 100px;
+	background-color: #ffffff;
+	box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.23);
+	display: flex;
+	justify-content: space-between;
+	padding: 0 40px;
+	font-size: 16px;
+	font-weight: 700;
+	align-items: center;
+`
