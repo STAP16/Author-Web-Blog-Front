@@ -1,9 +1,9 @@
 import { createBrowserRouter, Outlet } from 'react-router'
 
 import Blog from './Blog'
+import { Authorization } from './pages/Authorization'
 
 const ErrorPage = () => <div>страница ошибки</div>
-const Login = () => <div>Авторизация</div>
 const Register = () => <div>Регистрация</div>
 const Users = () => <div>Пользователи</div>
 const Posts = () => <Outlet />
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: 'login',
-				element: <Login />
+				element: <Authorization />
 			},
 			{
 				path: 'register',

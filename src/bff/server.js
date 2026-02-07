@@ -4,8 +4,8 @@ import { getUser } from './get-user'
 
 export const server = {
 	async authorize(authLogin, authPassword) {
-		const user = getUser(authLogin)
-
+		const user = await getUser(authLogin)
+		console.log(user)
 		if (!user) {
 			return {
 				error: 'Пользователь не найден',

@@ -27,7 +27,6 @@ function Blog() {
 		<AppColumn>
 			<Header />
 			<Content>
-				<H2>Контент страницы</H2>
 				<Outlet />
 			</Content>
 			<Footer />
