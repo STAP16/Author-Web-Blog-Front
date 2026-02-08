@@ -48,15 +48,15 @@ const ControlPanelContainer = ({ className }) => {
 				) : (
 					<>
 						<StyledUser>{login}</StyledUser>
-						<div
-							// to="/"
+						<NavLink
+							to="/"
 							onClick={handleLogout}
 						>
 							<Icon
 								id="fa-sign-out"
 								margin="10px 0 0 "
 							/>
-						</div>
+						</NavLink>
 					</>
 				)}
 			</RightAligned>
