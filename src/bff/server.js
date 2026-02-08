@@ -52,5 +52,9 @@ export const server = {
 				session: sessions.create(user)
 			}
 		}
+	},
+
+	async logout(session) {
+		sessions.remove(session)
 	}
 }

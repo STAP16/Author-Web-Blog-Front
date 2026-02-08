@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { Icon } from '../../../icon/icon'
 import { NavLink, useNavigate } from 'react-router'
+import { ROLE } from '../../../../bff/constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectUserRole, selectUserLogin, selectUserSession } from '../../../../selectors'
+import { logout } from '../../../../actions'
 
 const RightAligned = styled.div`
 	display: flex;
@@ -13,20 +17,48 @@ const StyledButton = styled.button`
 	height: 32px;
 `
 
+const StyledUser = styled.div`
+	font-size: 18px;
+	margin-right: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 500;
+`
+
 const ControlPanelContainer = ({ className }) => {
 	const navigate = useNavigate(null)
 
-	const handleNavigate = () => {
+	const handleNavigateToLogin = () => {
 		return navigate('/login')
 	}
-	const handleBack = () => {
-		return navigate(-1)
-	}
+
+	const roleId = useSelector(selectUserRole)
+	const login = useSelector(selectUserLogin)
+	const session = useSelector(selectUserSession)
+	const dispatch = useDispatch()
+
+	const handleLogout = () => dispatch(logout(session))
 
 	return (
 		<div className={className}>
 			<RightAligned>
-				<StyledButton onClick={handleNavigate}>Войти</StyledButton>
+				{roleId === ROLE.GUEST ? (
+					<StyledButton onClick={handleNavigateToLogin}>Войти</StyledButton>
+				) : (
+					<>
+						<StyledUser>{login}</StyledUser>
+						<div
+							// to="/"
+							onClick={handleLogout}
+						>
+							<Icon
+								id="fa-sign-out"
+								margin="10px 0 0 "
+							/>
+						</div>
+					</>
+				)}
 			</RightAligned>
 			<RightAligned>
 				<NavLink to={-1}>

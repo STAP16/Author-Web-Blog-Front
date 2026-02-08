@@ -1,13 +1,16 @@
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, useStore } from 'react-redux'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styled from 'styled-components'
 import { server } from '../bff'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Input, Button, H2 } from '../components'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 import { setUser } from '../actions'
+import { selectWasLogout } from '../selectors/select-was-logout'
+import { selectUserRole } from '../selectors'
+import { ROLE } from '../bff/constants'
 
 const authFormSchema = yup.object().shape({
 	login: yup
@@ -62,6 +65,7 @@ const StyledError = styled.div`
 const AuthorizationContainer = ({ className }) => {
 	const {
 		register,
+		reset,
 		handleSubmit,
 		formState: { errors }
 	} = useForm({
@@ -70,8 +74,20 @@ const AuthorizationContainer = ({ className }) => {
 	})
 
 	const [authError, setAuthError] = useState(null)
-	const [loading, setLoading] = useState(false)
+	const navigate = useNavigate(null)
+
 	const dispatch = useDispatch()
+	const wasLogout = useSelector(selectWasLogout)
+	const roleId = useSelector(selectUserRole)
+
+	if (roleId !== ROLE.GUEST) {
+		return navigate('/', { replace: true })
+	}
+
+	useEffect(() => {
+		reset()
+		setAuthError(null)
+	}, [wasLogout])
 
 	const onSubmit = ({ login, password }) => {
 		server.authorize(login, password).then(({ error, res }) => {
@@ -108,9 +124,9 @@ const AuthorizationContainer = ({ className }) => {
 				/>
 				<Button
 					type="submit"
-					disabled={!!formError || loading}
+					disabled={!!formError}
 				>
-					{loading ? 'Загрузка' : 'Войти'}
+					Войти
 				</Button>
 				<StyledRegisterLink to="/register">Регистрация</StyledRegisterLink>
 				{(authError || formError) && <StyledError>{errorMessage}</StyledError>}
