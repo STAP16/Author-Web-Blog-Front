@@ -1,6 +1,6 @@
 import { createUser } from './create-user'
-import { getSession } from './generate-session'
 import { getUser } from './get-user'
+import { sessions } from './sessions'
 
 export const server = {
 	async authorize(authLogin, authPassword) {
@@ -20,10 +20,14 @@ export const server = {
 			}
 		}
 
-		// После нажатия logout ссесия опусташается
 		return {
 			error: null,
-			res: getSession(user.role_id)
+			res: {
+				id: user.id,
+				login: user.login,
+				roleId: user.role_id,
+				session: sessions.create(user)
+			}
 		}
 	},
 
@@ -41,7 +45,12 @@ export const server = {
 
 		return {
 			error: null,
-			res: getSession(user.role_id)
+			res: {
+				id: user.id,
+				login: user.login,
+				roleId: user.role_id,
+				session: sessions.create(user)
+			}
 		}
 	}
 }
