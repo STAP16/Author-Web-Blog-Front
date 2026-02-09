@@ -5,7 +5,6 @@ import { sessions } from './sessions'
 export const server = {
 	async authorize(authLogin, authPassword) {
 		const user = await getUser(authLogin)
-		console.log(user)
 		if (!user) {
 			return {
 				error: 'Пользователь не найден',
@@ -32,17 +31,17 @@ export const server = {
 	},
 
 	async regitster(registerLogin, registerPassword) {
-		const user = getUser(registerLogin)
+		const existedUser = await getUser(registerLogin)
 
-		if (user) {
+		if (existedUser) {
 			return {
 				error: 'Пользователь с таким именем уже существует',
 				res: null
 			}
 		}
 
-		await createUser(registerLogin, registerPassword)
-
+		const user = await createUser(registerLogin, registerPassword)
+		console.log(user)
 		return {
 			error: null,
 			res: {

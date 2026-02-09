@@ -39,7 +39,6 @@ const ControlPanelContainer = ({ className }) => {
 	const dispatch = useDispatch()
 
 	const handleLogout = () => dispatch(logout(session))
-	// фывфы
 	return (
 		<div className={className}>
 			<RightAligned>

@@ -9,11 +9,11 @@ export const createUser = async (login, password) => {
 		role_id: 1
 	}
 
-	fetch('http://localhost:3000/users', {
+	return fetch('http://localhost:3000/users', {
 		method: 'POST',
 		body: JSON.stringify(newUser),
 		headers: {
 			'Content-Type': 'application/json'
 		}
-	})
+	}).then(createdUser => createdUser.json())
 }
