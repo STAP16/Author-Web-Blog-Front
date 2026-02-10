@@ -17,12 +17,12 @@ const UsersContainer = ({ className }) => {
 					setErrorMessage(usersRes.error || rolesRes.error)
 					return
 				}
-				setRoles(rolesRes)
-				setUsers(usersRes)
+				setRoles(rolesRes.res)
+				setUsers(usersRes.res)
 			}
 		)
 	}, [requestServer])
-
+	console.log(users)
 	return (
 		<div className={className}>
 			<Content error={errorMessage}>

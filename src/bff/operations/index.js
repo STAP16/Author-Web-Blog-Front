@@ -1,3 +1,5 @@
 export * from './logout.js'
 export * from './register.js'
 export * from './authorize.js'
+export * from './fetch-roles.js'
+export * from './fetch-users.js'

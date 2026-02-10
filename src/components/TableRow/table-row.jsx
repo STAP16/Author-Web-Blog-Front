@@ -8,9 +8,12 @@ export const TableRow = styled(TableRowContainer)`
 	& > div {
 		padding: 0 10px;
 	}
+	border-bottom: 1px solid #e8e8e8;
 
 	& .login-column {
 		width: 172px;
+		margin-top: 5px;
+		margin-bottom: 5px;
 	}
 
 	& .registered-at-column {

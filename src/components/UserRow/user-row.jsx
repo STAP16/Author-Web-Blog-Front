@@ -3,11 +3,10 @@ import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { Icon } from '../../components'
 import { TableRow } from '../../components/TableRow/table-row'
-const UserRowContainer = ({ className, user }) => {
+const UserRowContainer = ({ className, user, roles }) => {
 	const dispatch = useDispatch()
 
 	const { id: userId, login, registeredAt, roleId: userRoleId } = user
-	const roles = []
 	const onRoleChange = () => {
 		console.log('Change Role')
 	}
@@ -33,7 +32,10 @@ const UserRowContainer = ({ className, user }) => {
 					/>
 				</div>
 			</TableRow>
-			<div onClick={() => dispatch(/*TODO: Вставить action delete user*/)}>
+			<div
+				className="delete-user"
+				onClick={() => dispatch(/*TODO: Вставить action delete user*/)}
+			>
 				<Icon
 					id="fa-trash-o"
 					margin="0 0 0 10px"
@@ -43,4 +45,12 @@ const UserRowContainer = ({ className, user }) => {
 	)
 }
 
-export const UserRow = styled(UserRowContainer)``
+export const UserRow = styled(UserRowContainer)`
+	display: flex;
+	.delete-user {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-bottom: 1px solid #e8e8e8;
+	}
+`
