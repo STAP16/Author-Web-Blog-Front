@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { ROLE } from '../../bff/constants'
 import { useDispatch } from 'react-redux'
-import { Icon } from '../icon/icon'
+import { Icon, TableRow } from '../../components/TableRow/table-row'
 
 const UserRowContainer = ({ className, user }) => {
 	const dispatch = useDispatch()
@@ -14,8 +14,8 @@ const UserRowContainer = ({ className, user }) => {
 	}
 
 	return (
-		<div className="table-row">
-			<div className="user-data">
+		<div className={className}>
+			<TableRow>
 				<div className="login-column">{login}</div>
 				<div className="registered-at-column">{registeredAt}</div>
 
@@ -33,7 +33,7 @@ const UserRowContainer = ({ className, user }) => {
 						margin="0 0 0 10px"
 					/>
 				</div>
-			</div>
+			</TableRow>
 			<div onClick={() => dispatch(/*TODO: Вставить action delete user*/)}>
 				<Icon
 					id="fa-trash-o"
