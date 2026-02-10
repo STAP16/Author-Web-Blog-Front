@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 
-import { ROLE } from '../../bff/constants'
 import { useDispatch } from 'react-redux'
-import { Icon, TableRow } from '../../components/TableRow/table-row'
-
+import { Icon } from '../../components'
+import { TableRow } from '../../components/TableRow/table-row'
 const UserRowContainer = ({ className, user }) => {
 	const dispatch = useDispatch()
 

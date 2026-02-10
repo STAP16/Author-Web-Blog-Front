@@ -1,4 +1,4 @@
-import { getDate } from './generate-date'
+import { getDate } from '../utils/generate-date'
 
 const date = getDate()
 export const createUser = async (login, password) => {
