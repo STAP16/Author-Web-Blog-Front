@@ -3,9 +3,10 @@ import { createBrowserRouter, Outlet } from 'react-router'
 import Blog from './Blog'
 import { Authorization } from './pages/Authorization'
 import { Registration } from './pages/Registration'
+import { Users } from './pages/Users'
 
 const ErrorPage = () => <div>страница ошибки</div>
-const Users = () => <div>Пользователи</div>
+
 const Posts = () => <Outlet />
 const Post = () => <div>Пост c id</div>
 const PostsList = () => <div>Список статей</div>
