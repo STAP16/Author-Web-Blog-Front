@@ -14,21 +14,17 @@ const AppColumn = styled.div`
 	background-color: #fff;
 `
 
-const Content = styled.div`
+const Page = styled.div`
 	padding: 120px 0;
-`
-
-const H2 = styled.h2`
-	text-align: center;
 `
 
 function Blog() {
 	return (
 		<AppColumn>
 			<Header />
-			<Content>
+			<Page>
 				<Outlet />
-			</Content>
+			</Page>
 			<Footer />
 		</AppColumn>
 	)
