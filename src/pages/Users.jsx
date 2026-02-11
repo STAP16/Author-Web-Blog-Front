@@ -3,11 +3,13 @@ import { Content, H2, TableRow } from '../components'
 import { UserRow } from '../components/UserRow/user-row'
 import { useServerRequest } from '../hooks'
 import { useEffect, useState } from 'react'
+import { ROLE } from '../bff/constants'
 
 const UsersContainer = ({ className }) => {
 	const [roles, setRoles] = useState([])
 	const [users, setUsers] = useState([])
 	const [errorMessage, setErrorMessage] = useState(null)
+	const [shouldUpdateUserList, setShouldUpdateUserList] = useState(false)
 	const requestServer = useServerRequest()
 
 	useEffect(() => {
@@ -21,8 +23,14 @@ const UsersContainer = ({ className }) => {
 				setUsers(usersRes.res)
 			}
 		)
-	}, [requestServer])
-	console.log(users)
+	}, [requestServer, shouldUpdateUserList])
+
+	const onUserRemove = userId => {
+		requestServer('removeUser', userId).then(() => {
+			setShouldUpdateUserList(prev => !prev)
+		})
+	}
+
 	return (
 		<div className={className}>
 			<Content error={errorMessage}>
@@ -35,9 +43,11 @@ const UsersContainer = ({ className }) => {
 					</TableRow>
 					{users.map(user => (
 						<UserRow
+							onUserRemove={() => onUserRemove(user.id)}
 							user={user}
 							key={user.id}
-							roles={roles}
+							roles={roles.filter(({ id: roleId }) => Number(roleId) !== ROLE.GUEST)}
+							roleId={user.roleId}
 						/>
 					))}
 				</div>
