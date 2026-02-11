@@ -76,6 +76,7 @@ export const UserRow = styled(UserRowContainer)`
 
 	.enabled-save-button {
 		color: #000000;
+		cursor: pointer;
 	}
 
 	.disabled-save-button {

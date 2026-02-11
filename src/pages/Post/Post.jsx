@@ -27,4 +27,7 @@ const PostContainer = ({ className }) => {
 	)
 }
 
-export const Post = styled(PostContainer)``
+export const Post = styled(PostContainer)`
+	margin: 40px 0;
+	padding: 0px 80px;
+`

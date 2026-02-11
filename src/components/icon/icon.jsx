@@ -14,5 +14,4 @@ export const Icon = styled(IconContainer)`
 	margin: ${({ margin = '0' }) => margin};
 	display: flex;
 	justify-content: center;
-	cursor: pointer;
 `
