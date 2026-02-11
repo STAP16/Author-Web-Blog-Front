@@ -4,11 +4,11 @@ import Blog from './Blog'
 import { Authorization } from './pages/Authorization'
 import { Registration } from './pages/Registration'
 import { Users } from './pages/Users'
+import { Post } from './pages/Post/Post'
 
 const ErrorPage = () => <div>страница ошибки</div>
 
 const Posts = () => <Outlet />
-const Post = () => <div>Пост c id</div>
 const PostsList = () => <div>Список статей</div>
 
 export const router = createBrowserRouter([
