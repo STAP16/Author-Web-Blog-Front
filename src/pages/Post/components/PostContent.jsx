@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { H2, Icon } from '../../../components'
 
 const PostContnetContainer = ({ className, post }) => {
-	const { id, title, imageUrl, content, publishedAt } = post
+	const { title, imageUrl, content, publishedAt } = post
 
 	return (
 		<div className={className}>
@@ -63,5 +63,9 @@ export const PostContent = styled(PostContnetContainer)`
 	& .buttons {
 		display: flex;
 		cursor: pointer;
+	}
+
+	& .post-text {
+		font-size: 18px;
 	}
 `

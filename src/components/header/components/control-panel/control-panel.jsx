@@ -38,7 +38,10 @@ const ControlPanelContainer = ({ className }) => {
 	const session = useSelector(selectUserSession)
 	const dispatch = useDispatch()
 
-	const handleLogout = () => dispatch(logout(session))
+	const handleLogout = () => {
+		sessionStorage.removeItem('userData')
+		dispatch(logout(session))
+	}
 	return (
 		<div className={className}>
 			<RightAligned>
