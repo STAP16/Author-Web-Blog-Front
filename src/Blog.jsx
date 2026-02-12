@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from 'react'
 import { Outlet } from 'react-router'
 import styled from 'styled-components'
-import { Footer, Header } from './components'
+import { Footer, Header, Modal } from './components'
 import { setUser } from './actions'
 import { useDispatch } from 'react-redux'
 
@@ -39,6 +39,7 @@ function Blog() {
 				<Outlet />
 			</Page>
 			<Footer />
+			<Modal />
 		</AppColumn>
 	)
 }

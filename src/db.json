@@ -77,40 +77,7 @@
       "published_at": "2019-11-23"
     }
   ],
-  "comments": [
-    {
-      "id": "1f17",
-      "author_id": "001",
-      "user_login": "admin_root",
-      "post_id": "1",
-      "content": "Первый коммент\n",
-      "published_at": "2026-02-12 12:19"
-    },
-    {
-      "id": "0e64",
-      "user_login": "admin_root",
-      "author_id": "001",
-      "post_id": "1",
-      "content": "Второй коммент",
-      "published_at": "2026-02-12 13:30"
-    },
-    {
-      "id": "4890",
-      "user_login": "admin_root",
-      "author_id": "001",
-      "post_id": "1",
-      "content": "Трейтий коммент",
-      "published_at": "2026-02-12 13:32"
-    },
-    {
-      "id": "4ebe",
-      "user_login": "admin_root",
-      "author_id": "001",
-      "post_id": "1",
-      "content": "Мой второй коммент с admin_root",
-      "published_at": "2026-02-12 13:34"
-    }
-  ],
+  "comments": [],
   "sessions": [
     {
       "id": "6a7e",
