@@ -2,19 +2,25 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { Comment, Icon } from '../../../components'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectUserId } from '../../../selectors'
+import { selectUserId, selectUserLogin } from '../../../selectors'
 import { useServerRequest } from '../../../hooks'
 import { addCommentAsync } from '../../../actions'
 
 const CommentsContainer = ({ className, comments, postId }) => {
 	const [newComment, setNewComment] = useState('')
 	const userId = useSelector(selectUserId)
+	const userLogin = useSelector(selectUserLogin)
 
 	const dispatch = useDispatch()
 	const requestServer = useServerRequest()
 
-	const onNewCommentAdd = (userId, postId, content) => {
-		dispatch(addCommentAsync(requestServer, userId, postId, content))
+	const onNewCommentAdd = (userLogin, userId, postId, content) => {
+		if (!content) {
+			return
+		}
+		setNewComment('')
+
+		dispatch(addCommentAsync(requestServer, userLogin, userId, postId, content))
 	}
 
 	return (
@@ -28,7 +34,7 @@ const CommentsContainer = ({ className, comments, postId }) => {
 				/>
 				<div
 					className={newComment ? 'sent-comment-enabled' : 'sent-comment-disabled'}
-					onClick={() => onNewCommentAdd(userId, postId, newComment)}
+					onClick={() => onNewCommentAdd(userLogin, userId, postId, newComment)}
 				>
 					<Icon
 						id="fa-paper-plane-o"
@@ -38,10 +44,10 @@ const CommentsContainer = ({ className, comments, postId }) => {
 				</div>
 			</div>
 			<div className="comments">
-				{comments.map(({ id, author, content, published_at: publishedAt }) => (
+				{comments.map(({ id, userLogin, content, publishedAt }) => (
 					<Comment
 						key={id}
-						author={author}
+						author={userLogin}
 						content={content}
 						publishedAt={publishedAt}
 					/>
@@ -53,7 +59,6 @@ const CommentsContainer = ({ className, comments, postId }) => {
 
 export const Comments = styled(CommentsContainer)`
 	width: 580px;
-	display: flex;
 	margin: 20px auto;
 
 	& .new-comment {
@@ -64,7 +69,7 @@ export const Comments = styled(CommentsContainer)`
 
 	& .new-comment textarea {
 		resize: none;
-		width: 100%;
+		width: 550px;
 		height: 120px;
 		font-size: 18px;
 		padding: 10px;

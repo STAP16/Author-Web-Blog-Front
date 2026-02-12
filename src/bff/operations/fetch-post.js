@@ -1,5 +1,4 @@
 import { getComments, getPost } from '../api'
-import { ROLE } from '../constants/role-constants'
 
 export const fetchPost = async postId => {
 	const post = await getPost(postId)

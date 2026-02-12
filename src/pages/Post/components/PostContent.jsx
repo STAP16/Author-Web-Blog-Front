@@ -8,7 +8,7 @@ const PostContnetContainer = ({ className, post }) => {
 	return (
 		<div className={className}>
 			<img
-				src={imageUrl}
+				src={imageUrl ? imageUrl : 'skeletonImage'}
 				alt={title}
 			/>
 			<H2>{title}</H2>
