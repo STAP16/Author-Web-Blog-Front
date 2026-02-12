@@ -9,6 +9,7 @@ import { Post } from './pages/Post/Post'
 const ErrorPage = () => <div>страница ошибки</div>
 
 const Posts = () => <Outlet />
+const PostPage = () => <Outlet />
 const PostsList = () => <div>Список статей</div>
 
 export const router = createBrowserRouter([
@@ -31,8 +32,17 @@ export const router = createBrowserRouter([
 					},
 					{
 						path: ':id',
-						element: <Post />,
-						index: true
+						element: <PostPage />,
+						children: [
+							{
+								element: <Post />,
+								index: true
+							},
+							{
+								path: 'edit',
+								element: <Post />
+							}
+						]
 					},
 					{
 						path: 'new',

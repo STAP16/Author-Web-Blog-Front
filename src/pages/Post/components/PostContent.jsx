@@ -1,9 +1,13 @@
 import styled from 'styled-components'
-import { useEffect } from 'react'
 import { H2, Icon } from '../../../components'
+import { SpecialPanel } from './SpecialPanel'
+import { useNavigate } from 'react-router'
 
 const PostContnetContainer = ({ className, post }) => {
 	const { title, imageUrl, content, publishedAt } = post
+	const navigate = useNavigate(null)
+
+	const handleNavigate = () => navigate('edit')
 
 	return (
 		<div className={className}>
@@ -12,27 +16,21 @@ const PostContnetContainer = ({ className, post }) => {
 				alt={title}
 			/>
 			<H2>{title}</H2>
-			<div className="special-panel">
-				<div className="published-at">
-					<Icon
-						id="fa-calendar-o"
-						margin="0 8px 0 0"
-						size="18px"
-					/>
-					{publishedAt}
-				</div>
-				<div className="buttons">
-					<Icon
-						id="fa-pencil-square-o"
-						margin="0 12px 0 0"
-						size="21px"
-					/>
-					<Icon
-						id="fa-trash-o"
-						size="21px"
-					/>
-				</div>
-			</div>
+			<SpecialPanel
+				publishedAt={publishedAt}
+				editButton={
+					<div
+						className="edit-post"
+						onClick={handleNavigate}
+					>
+						<Icon
+							id="fa-pencil-square-o"
+							margin="0 12px 0 0"
+							size="21px"
+						/>
+					</div>
+				}
+			/>
 			<div className="post-text">{content}</div>
 		</div>
 	)
@@ -46,9 +44,6 @@ export const PostContent = styled(PostContnetContainer)`
 
 	& .special-panel {
 		margin: -20px 0 20px;
-		font-size: 18px;
-		display: flex;
-		justify-content: space-between;
 	}
 
 	& .published-at {
@@ -67,5 +62,6 @@ export const PostContent = styled(PostContnetContainer)`
 
 	& .post-text {
 		font-size: 18px;
+		white-space: pre-line;
 	}
 `
