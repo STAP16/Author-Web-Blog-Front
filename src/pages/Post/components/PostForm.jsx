@@ -3,9 +3,17 @@ import { Icon, Input } from '../../../components'
 import { SpecialPanel } from './SpecialPanel'
 import { useRef } from 'react'
 import { sanitizeContent } from '../utils'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { savePostAsync } from '../../../actions'
+import { useServerRequest } from '../../../hooks'
 
 const PostFormContainer = ({ className, post }) => {
-	const { title, imageUrl, content, publishedAt } = post
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const requestServer = useServerRequest()
+
+	const { id, title, imageUrl, content, publishedAt } = post
 
 	const imageRef = useRef(null)
 	const titleRef = useRef(null)
@@ -13,12 +21,13 @@ const PostFormContainer = ({ className, post }) => {
 
 	const onSave = () => {
 		const newPostData = {
+			id,
 			title: titleRef.current.value,
 			imageUrl: imageRef.current.value,
 			content: sanitizeContent(contentRef.current.innerHTML)
 		}
 
-		console.log('On Save newPostData:\n', newPostData)
+		dispatch(savePostAsync(requestServer, newPostData)).then(() => navigate(`/posts/${id}`))
 	}
 
 	return (
