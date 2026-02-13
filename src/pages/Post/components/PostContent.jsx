@@ -3,7 +3,7 @@ import { H2, Icon } from '../../../components'
 import { SpecialPanel } from './SpecialPanel'
 import { useNavigate } from 'react-router'
 
-const PostContnetContainer = ({ className, post }) => {
+const PostContnetContainer = ({ className, post, isNewPost }) => {
 	const { id, title, imageUrl, content, publishedAt } = post
 	const navigate = useNavigate(null)
 
@@ -17,6 +17,7 @@ const PostContnetContainer = ({ className, post }) => {
 			/>
 			<H2>{title}</H2>
 			<SpecialPanel
+				isNewPost={isNewPost}
 				id={id}
 				publishedAt={publishedAt}
 				editButton={

@@ -8,10 +8,12 @@ import { useServerRequest } from '../../hooks/use-server-request'
 import { loadPostAsync, RESET_POST_DATA } from '../../actions'
 import { selectPost } from '../../selectors'
 import { PostForm } from './components/PostForm'
+import { initialPostState } from '../../reducers/post_reducer'
 
 const PostContainer = ({ className }) => {
 	const post = useSelector(selectPost)
 	const isEditing = useMatch('/posts/:id/edit')
+	const isNewPost = useMatch('/posts/new')
 
 	const dispatch = useDispatch()
 	const { id } = useParams()
@@ -19,19 +21,28 @@ const PostContainer = ({ className }) => {
 
 	useLayoutEffect(() => {
 		dispatch(RESET_POST_DATA)
-	}, [dispatch])
+	}, [dispatch, isNewPost])
 
 	useEffect(() => {
+		if (isNewPost) {
+			return
+		}
 		dispatch(loadPostAsync(requestServer, id))
-	}, [dispatch, requestServer, id])
+	}, [dispatch, requestServer, id, isNewPost])
 
 	return (
 		<div className={className}>
-			{isEditing ? (
-				<PostForm post={post} />
+			{isNewPost || isEditing ? (
+				<PostForm
+					post={post}
+					isNewPost={isNewPost}
+				/>
 			) : (
 				<>
-					<PostContent post={post} />
+					<PostContent
+						post={isNewPost ? initialPostState : post}
+						isNewPost={isNewPost}
+					/>
 					<Comments
 						comments={post.comments}
 						postId={post.id}

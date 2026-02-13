@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router'
 import { savePostAsync } from '../../../actions'
 import { useServerRequest } from '../../../hooks'
 
-const PostFormContainer = ({ className, post }) => {
+const PostFormContainer = ({ className, post, isNewPost }) => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const requestServer = useServerRequest()
@@ -27,7 +27,7 @@ const PostFormContainer = ({ className, post }) => {
 			content: sanitizeContent(contentRef.current.innerHTML)
 		}
 
-		dispatch(savePostAsync(requestServer, newPostData)).then(() => navigate(`/posts/${id}`))
+		dispatch(savePostAsync(requestServer, newPostData)).then(({ id }) => navigate(`/posts/${id}`))
 	}
 
 	return (
@@ -44,6 +44,7 @@ const PostFormContainer = ({ className, post }) => {
 			/>
 			<SpecialPanel
 				id={id}
+				isNewPost={isNewPost}
 				publishedAt={publishedAt}
 				editButton={
 					<div
@@ -52,7 +53,6 @@ const PostFormContainer = ({ className, post }) => {
 					>
 						<Icon
 							id="fa-floppy-o"
-							margin="0 12px 0 0"
 							size="21px"
 						/>
 					</div>
@@ -88,5 +88,8 @@ export const PostForm = styled(PostFormContainer)`
 	& .post-text {
 		font-size: 18px;
 		white-space: pre-line;
+		border: 1px solid #000000;
+		min-height: 100px;
+		padding: 10px;
 	}
 `
