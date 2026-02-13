@@ -4,7 +4,7 @@ import { SpecialPanel } from './SpecialPanel'
 import { useNavigate } from 'react-router'
 
 const PostContnetContainer = ({ className, post }) => {
-	const { title, imageUrl, content, publishedAt } = post
+	const { id, title, imageUrl, content, publishedAt } = post
 	const navigate = useNavigate(null)
 
 	const handleNavigate = () => navigate('edit')
@@ -17,6 +17,7 @@ const PostContnetContainer = ({ className, post }) => {
 			/>
 			<H2>{title}</H2>
 			<SpecialPanel
+				id={id}
 				publishedAt={publishedAt}
 				editButton={
 					<div

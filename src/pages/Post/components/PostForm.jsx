@@ -43,6 +43,7 @@ const PostFormContainer = ({ className, post }) => {
 				placeholder="Заголовок..."
 			/>
 			<SpecialPanel
+				id={id}
 				publishedAt={publishedAt}
 				editButton={
 					<div
