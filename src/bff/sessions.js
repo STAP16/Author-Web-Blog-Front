@@ -1,9 +1,9 @@
 import { addSession, deleteSession, getSession } from './api'
 
 export const sessions = {
-	create(user) {
+	async create(user) {
 		const hash = Math.random().toFixed(50)
-		addSession(hash, user)
+		await addSession(hash, user)
 		return hash
 	},
 
@@ -19,6 +19,6 @@ export const sessions = {
 
 	async access(hash, accessRoles) {
 		const session = await getSession(hash)
-		return !!session.user && accessRoles.includes(session.user.roleId)
+		return !!session?.user && accessRoles.includes(session.user.roleId)
 	}
 }
