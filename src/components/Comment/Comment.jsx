@@ -1,12 +1,16 @@
 import styled from 'styled-components'
 import { Icon } from '../icon/icon'
 import { useServerRequest } from '../../hooks'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CLOSE_MODAL, openModal, removeCommentAsync } from '../../actions'
+import { checkAccess } from '../../utils'
+import { ROLE } from '../../bff/constants'
+import { selectUserRole } from '../../selectors'
 
 const CommentContainer = ({ className, author, content, publishedAt, commentId, postId }) => {
 	const requestServer = useServerRequest()
 	const dispatch = useDispatch()
+	const roleId = useSelector(selectUserRole)
 	const onCommentRemove = id => {
 		dispatch(
 			openModal({
@@ -22,6 +26,8 @@ const CommentContainer = ({ className, author, content, publishedAt, commentId, 
 			return
 		}
 	}
+
+	const isRoleCanDeletedComments = checkAccess([ROLE.ADMIN, ROLE.MODERATOR], roleId)
 
 	return (
 		<div className={className}>
@@ -47,16 +53,18 @@ const CommentContainer = ({ className, author, content, publishedAt, commentId, 
 				</div>
 				<div className="comment-text">{content}</div>
 			</div>
-			<div
-				className="delete-comment"
-				onClick={() => onCommentRemove(commentId)}
-			>
-				<Icon
-					id="fa-trash-o"
-					size="21px"
-					margin="0 0px 0 10px"
-				/>
-			</div>
+			{isRoleCanDeletedComments && (
+				<div
+					className="delete-comment"
+					onClick={() => onCommentRemove(commentId)}
+				>
+					<Icon
+						id="fa-trash-o"
+						size="21px"
+						margin="0 0px 0 10px"
+					/>
+				</div>
+			)}
 		</div>
 	)
 }

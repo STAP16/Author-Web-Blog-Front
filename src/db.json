@@ -91,16 +91,7 @@
       "published_at": "2026-02-13 18:16"
     }
   ],
-  "comments": [
-    {
-      "id": "aff9",
-      "user_login": "admin_root",
-      "author_id": "001",
-      "post_id": "1",
-      "content": "Крутяк",
-      "published_at": "2026-02-13 16:28"
-    }
-  ],
+  "comments": [],
   "sessions": [
     {
       "id": "4f7d",
@@ -115,6 +106,16 @@
     {
       "id": "a420",
       "hash": "0.06960256872757131230144977962481789290904998779297",
+      "user": {
+        "id": "001",
+        "login": "admin_root",
+        "roleId": 0,
+        "password": "rootadmin"
+      }
+    },
+    {
+      "id": "689b",
+      "hash": "0.08993838610866822236289408465381711721420288085938",
       "user": {
         "id": "001",
         "login": "admin_root",

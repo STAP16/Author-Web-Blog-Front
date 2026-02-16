@@ -2,14 +2,17 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { Comment, Icon } from '../../../components'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectUserId, selectUserLogin } from '../../../selectors'
+import { selectUserId, selectUserLogin, selectUserRole } from '../../../selectors'
 import { useServerRequest } from '../../../hooks'
 import { addCommentAsync } from '../../../actions'
+import { ROLE } from '../../../bff/constants'
+import { checkAccess } from '../../../utils'
 
 const CommentsContainer = ({ className, comments, postId }) => {
 	const [newComment, setNewComment] = useState('')
 	const userId = useSelector(selectUserId)
 	const userLogin = useSelector(selectUserLogin)
+	const roleId = useSelector(selectUserRole)
 
 	const dispatch = useDispatch()
 	const requestServer = useServerRequest()
@@ -23,26 +26,29 @@ const CommentsContainer = ({ className, comments, postId }) => {
 		dispatch(addCommentAsync(requestServer, userLogin, userId, postId, content))
 	}
 
+	const isNotGuest = checkAccess([ROLE.ADMIN, ROLE.READER, ROLE.MODERATOR], roleId)
 	return (
 		<div className={className}>
-			<div className="new-comment">
-				<textarea
-					name="comment"
-					value={newComment}
-					placeholder="Комментарий..."
-					onChange={({ target }) => setNewComment(target.value)}
-				/>
-				<div
-					className={newComment ? 'sent-comment-enabled' : 'sent-comment-disabled'}
-					onClick={() => onNewCommentAdd(userLogin, userId, postId, newComment)}
-				>
-					<Icon
-						id="fa-paper-plane-o"
-						margin="0 0 0 10px"
-						size="18px"
+			{isNotGuest && (
+				<div className="new-comment">
+					<textarea
+						name="comment"
+						value={newComment}
+						placeholder="Комментарий..."
+						onChange={({ target }) => setNewComment(target.value)}
 					/>
+					<div
+						className={newComment ? 'sent-comment-enabled' : 'sent-comment-disabled'}
+						onClick={() => onNewCommentAdd(userLogin, userId, postId, newComment)}
+					>
+						<Icon
+							id="fa-paper-plane-o"
+							margin="0 0 0 10px"
+							size="18px"
+						/>
+					</div>
 				</div>
-			</div>
+			)}
 			<div className="comments">
 				{comments.map(({ id, userLogin, content, publishedAt }) => (
 					<Comment

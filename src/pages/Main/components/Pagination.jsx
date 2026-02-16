@@ -37,7 +37,7 @@ export const Pagination = styled(PaginationContainer)`
 	display: flex;
 	justifuy-content: center;
 	position: absolute;
-	bottom: 140px;
+	bottom: 125px;
 	width: 100%;
 	padding: 0px 35px;
 	& button {

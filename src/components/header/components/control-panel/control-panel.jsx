@@ -5,6 +5,7 @@ import { ROLE } from '../../../../bff/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUserRole, selectUserLogin, selectUserSession } from '../../../../selectors'
 import { logout } from '../../../../actions'
+import { checkAccess } from '../../../../utils'
 
 const RightAligned = styled.div`
 	display: flex;
@@ -42,6 +43,9 @@ const ControlPanelContainer = ({ className }) => {
 		sessionStorage.removeItem('userData')
 		dispatch(logout(session))
 	}
+
+	const isAdmin = checkAccess([ROLE.ADMIN], roleId)
+
 	return (
 		<div className={className}>
 			<RightAligned>
@@ -69,18 +73,22 @@ const ControlPanelContainer = ({ className }) => {
 						margin="10px 0 0 "
 					/>
 				</NavLink>
-				<NavLink to={'/posts/new'}>
-					<Icon
-						id="fa-file-text-o"
-						margin="10px 0px 0px 17px"
-					/>
-				</NavLink>
-				<NavLink to={'/users'}>
-					<Icon
-						id="fa-users"
-						margin="10px 0px 0px 17px"
-					/>
-				</NavLink>
+				{isAdmin && (
+					<>
+						<NavLink to={'/posts/new'}>
+							<Icon
+								id="fa-file-text-o"
+								margin="10px 0px 0px 17px"
+							/>
+						</NavLink>
+						<NavLink to={'/users'}>
+							<Icon
+								id="fa-users"
+								margin="10px 0px 0px 17px"
+							/>
+						</NavLink>
+					</>
+				)}
 			</RightAligned>
 		</div>
 	)

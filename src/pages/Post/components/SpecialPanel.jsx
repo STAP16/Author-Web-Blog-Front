@@ -1,14 +1,18 @@
 import styled from 'styled-components'
 import { Icon } from '../../../components'
 import { CLOSE_MODAL, openModal, removePostAsync } from '../../../actions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useServerRequest } from '../../../hooks'
 import { useNavigate } from 'react-router'
+import { checkAccess } from '../../../utils'
+import { ROLE } from '../../../bff/constants'
+import { selectUserRole } from '../../../selectors'
 
 const SpecialPanelContainer = ({ id, className, publishedAt, editButton }) => {
 	const dispatch = useDispatch()
 	const requestServer = useServerRequest()
 	const navigate = useNavigate()
+	const roleId = useSelector(selectUserRole)
 
 	const onPostRemove = id => {
 		dispatch(
@@ -23,6 +27,8 @@ const SpecialPanelContainer = ({ id, className, publishedAt, editButton }) => {
 		)
 	}
 
+	const isAdmin = checkAccess([ROLE.ADMIN], roleId)
+
 	return (
 		<div className={className}>
 			<div className="published-at">
@@ -36,21 +42,23 @@ const SpecialPanelContainer = ({ id, className, publishedAt, editButton }) => {
 				{publishedAt}
 			</div>
 
-			<div className="buttons">
-				{editButton}
-				{publishedAt && (
-					<div
-						className="remove-comment"
-						onClick={() => onPostRemove(id)}
-					>
-						<Icon
-							id="fa-trash-o"
-							size="21px"
-							margin="0 0 0 10px"
-						/>
-					</div>
-				)}
-			</div>
+			{isAdmin && (
+				<div className="buttons">
+					{editButton}
+					{publishedAt && (
+						<div
+							className="remove-comment"
+							onClick={() => onPostRemove(id)}
+						>
+							<Icon
+								id="fa-trash-o"
+								size="21px"
+								margin="0 0 0 10px"
+							/>
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	)
 }
