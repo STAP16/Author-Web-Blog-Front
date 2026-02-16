@@ -6,8 +6,10 @@ import { Registration } from './pages/Registration'
 import { Users } from './pages/Users'
 import { Post } from './pages/Post/Post'
 import { Main } from './pages/Main/Main'
+import { Error } from './components'
+import { ERROR } from './bff/constants'
 
-const ErrorPage = () => <div>страница ошибки</div>
+const ErrorPage = () => <Error error={ERROR.PAGE_NOT_EXITS} />
 
 const Posts = () => <Outlet />
 const PostPage = () => <Outlet />
@@ -62,6 +64,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'register',
 				element: <Registration />
+			},
+			{
+				path: '*',
+				element: <ErrorPage />
 			}
 		]
 	}

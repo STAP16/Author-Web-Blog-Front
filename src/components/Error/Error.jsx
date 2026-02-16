@@ -6,15 +6,13 @@ const Div = styled.div`
 	margin: 0 auto;
 	flex-direction: column;
 	align-items: center;
+	font-size: 18px;
 `
 
-export const Content = ({ children, error }) => {
-	return error ? (
+export const Error = ({ error }) =>
+	error && (
 		<Div>
 			<H2>Ошибка</H2>
 			<div>{error}</div>
 		</Div>
-	) : (
-		children
 	)
-}
