@@ -111,6 +111,16 @@
         "roleId": 0,
         "password": "rootadmin"
       }
+    },
+    {
+      "id": "a420",
+      "hash": "0.06960256872757131230144977962481789290904998779297",
+      "user": {
+        "id": "001",
+        "login": "admin_root",
+        "roleId": 0,
+        "password": "rootadmin"
+      }
     }
   ]
 }
