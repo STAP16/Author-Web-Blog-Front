@@ -21,5 +21,5 @@ export const Button = styled(ButtonContainer)`
 	width: ${({ width = '100%' }) => width};
 	height: 32px;
 	background-color: rgb(238, 238, 238);
-	cursor: pointer;
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 `

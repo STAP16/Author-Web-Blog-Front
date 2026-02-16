@@ -7,7 +7,7 @@ const PostCardContainer = ({ className, id, title, publishedAt, commentsCount, i
 		<div className={className}>
 			<NavLink to={`/posts/${id}`}>
 				<img
-					src={imageUrl}
+					src={imageUrl ? imageUrl : 'skeletonImage'}
 					alt={title}
 				/>
 				<div className="post-card-footer">
