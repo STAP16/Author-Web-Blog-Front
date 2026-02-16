@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Icon } from '../../../components'
 import { CLOSE_MODAL, openModal, removePostAsync } from '../../../actions'
@@ -74,3 +75,8 @@ export const SpecialPanel = styled(SpecialPanelContainer)`
 		top: 5px;
 	}
 `
+SpecialPanel.propTypes = {
+	id: PropTypes.string.isRequired,
+	publishedAt: PropTypes.string.isRequired,
+	editButton: PropTypes.node.isRequired
+}

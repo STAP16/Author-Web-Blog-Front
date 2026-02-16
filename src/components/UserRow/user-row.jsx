@@ -1,9 +1,11 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import { Icon } from '../../components'
 import { TableRow } from '../../components/TableRow/table-row'
 import { useState } from 'react'
 import { useServerRequest } from '../../hooks'
+import { PROP_TYPE } from '../../bff/constants'
 
 const UserRowContainer = ({ className, user, roles, roleId: userRoleId, onUserRemove }) => {
 	const requestServer = useServerRequest()
@@ -35,6 +37,7 @@ const UserRowContainer = ({ className, user, roles, roleId: userRoleId, onUserRe
 						<option
 							key={roleId}
 							value={roleId}
+							name={roleName}
 						>
 							{roleName}
 						</option>
@@ -84,3 +87,8 @@ export const UserRow = styled(UserRowContainer)`
 		cursor: default;
 	}
 `
+UserRow.propTypes = {
+	user: PROP_TYPE.USER,
+	roles: PropTypes.arrayOf([PROP_TYPE.ROLE]).isRequired,
+	onUserRemove: PropTypes.func.isRequired
+}

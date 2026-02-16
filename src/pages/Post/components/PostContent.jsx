@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { H2, Icon } from '../../../components'
 import { SpecialPanel } from './SpecialPanel'
 import { useNavigate } from 'react-router'
+import { PROP_TYPE } from '../../../bff/constants'
 
 const PostContnetContainer = ({ className, post, isNewPost }) => {
 	const { id, title, imageUrl, content, publishedAt } = post
@@ -67,3 +69,8 @@ export const PostContent = styled(PostContnetContainer)`
 		white-space: pre-line;
 	}
 `
+
+PostContent.propTypes = {
+	post: PROP_TYPE.POST.isRequired,
+	isNewPost: PropTypes.bool.isRequired
+}

@@ -4,8 +4,9 @@ import { useServerRequest } from '../../hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { CLOSE_MODAL, openModal, removeCommentAsync } from '../../actions'
 import { checkAccess } from '../../utils'
-import { ROLE } from '../../bff/constants'
+import { PROP_TYPE, ROLE } from '../../bff/constants'
 import { selectUserRole } from '../../selectors'
+import PropTypes from 'prop-types'
 
 const CommentContainer = ({ className, author, content, publishedAt, commentId, postId }) => {
 	const requestServer = useServerRequest()
@@ -108,3 +109,10 @@ export const Comment = styled(CommentContainer)`
 		cursor: pointer;
 	}
 `
+Comment.propTypes = {
+	postId: PropTypes.string.isRequired,
+	author: PropTypes.string.isRequired,
+	content: PropTypes.string.isRequired,
+	publishedAt: PropTypes.string.isRequired,
+	commentId: PropTypes.string.isRequired
+}

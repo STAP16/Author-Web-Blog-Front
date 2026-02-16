@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const IconContainer = ({ className, id }) => (
 	<div className={className}>
@@ -15,3 +16,7 @@ export const Icon = styled(IconContainer)`
 	display: flex;
 	justify-content: center;
 `
+
+Icon.propTypes = {
+	id: PropTypes.string.isRequired
+}

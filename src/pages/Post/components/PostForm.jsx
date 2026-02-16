@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Icon, Input } from '../../../components'
 import { SpecialPanel } from './SpecialPanel'
@@ -7,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { savePostAsync } from '../../../actions'
 import { useServerRequest } from '../../../hooks'
+import { PROP_TYPE } from '../../../bff/constants'
 
 const PostFormContainer = ({ className, post, isNewPost }) => {
 	const dispatch = useDispatch()
@@ -93,3 +95,8 @@ export const PostForm = styled(PostFormContainer)`
 		padding: 10px;
 	}
 `
+
+PostForm.propTypes = {
+	post: PROP_TYPE.POST.isRequired,
+	isNewPost: PropTypes.bool.isRequired
+}

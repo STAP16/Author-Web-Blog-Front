@@ -56,9 +56,9 @@ const UsersContainer = ({ className }) => {
 					</TableRow>
 					{users.map(user => (
 						<UserRow
+							key={user.id}
 							onUserRemove={() => onUserRemove(user.id)}
 							user={user}
-							key={user.id}
 							roles={roles.filter(({ id: roleId }) => Number(roleId) !== ROLE.GUEST)}
 							roleId={user.roleId}
 						/>
