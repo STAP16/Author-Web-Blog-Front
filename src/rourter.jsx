@@ -5,6 +5,7 @@ import { Authorization } from './pages/Authorization'
 import { Registration } from './pages/Registration'
 import { Users } from './pages/Users'
 import { Post } from './pages/Post/Post'
+import { Main } from './pages/Main/Main'
 
 const ErrorPage = () => <div>страница ошибки</div>
 
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
 		element: <Blog />,
 		errorElement: <ErrorPage />,
 		children: [
+			{
+				index: true,
+				element: <Main />
+			},
 			{
 				path: 'users',
 				element: <Users />
